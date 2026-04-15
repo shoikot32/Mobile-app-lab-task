@@ -1,0 +1,11 @@
+data class Event(
+    val title: String,
+    val date: String,
+    val time: String,
+    val venue: String,
+    val category: String,
+    val description: String,
+    val imageRes: Int,
+    val availableSeats: Int,
+    val price: Double
+) : java.io.Serializable
