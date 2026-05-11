@@ -1,7 +1,10 @@
 package com.example.lab10event
 
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class EventAdapter(
@@ -10,12 +13,12 @@ class EventAdapter(
 ) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     inner class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivBanner: ImageView = view.findViewById(R.id.ivEventBanner)
-        val tvTitle: TextView   = view.findViewById(R.id.tvEventTitle)
-        val tvDate: TextView    = view.findViewById(R.id.tvEventDate)
-        val tvVenue: TextView   = view.findViewById(R.id.tvEventVenue)
-        val tvSeats: TextView   = view.findViewById(R.id.tvSeats)
-        val tvPrice: TextView   = view.findViewById(R.id.tvPrice)
+        val ivEventBanner: ImageView = view.findViewById(R.id.ivEventBanner)
+        val tvEventTitle: TextView   = view.findViewById(R.id.tvEventTitle)
+        val tvEventDate: TextView    = view.findViewById(R.id.tvEventDate)
+        val tvEventVenue: TextView   = view.findViewById(R.id.tvEventVenue)
+        val tvSeats: TextView        = view.findViewById(R.id.tvSeats)
+        val tvPrice: TextView        = view.findViewById(R.id.tvPrice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -25,33 +28,25 @@ class EventAdapter(
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        val e = events[position]
+        val event = events[position]
 
-        holder.ivBanner.setImageResource(e.imageRes)
-        holder.tvTitle.text = e.title
-        holder.tvDate.text  = "📅 ${e.date} • ${e.time}"
-        holder.tvVenue.text = "📍 ${e.venue}"
-        holder.tvSeats.text = "💺 ${e.availableSeats} seats left"
+        holder.ivEventBanner.setImageResource(event.imageRes)
+        holder.tvEventTitle.text = event.title
+        holder.tvEventDate.text  = "📅 ${event.date}  ⏰ ${event.time}"
+        holder.tvEventVenue.text = "📍 ${event.venue}"
+        holder.tvSeats.text      = "💺 ${event.availableSeats} seats left"
+        holder.tvPrice.text      = if (event.price == 0.0) "FREE"
+        else "৳${"%.0f".format(event.price)}"
 
-        holder.tvPrice.text =
-            if (e.price == 0.0) "FREE"
-            else "৳${"%.0f".format(e.price)}"
-
-        // ✅ Safe click (uses current adapter position)
         holder.itemView.setOnClickListener {
-            val pos = holder.bindingAdapterPosition
-            if (pos != RecyclerView.NO_POSITION) {
-                onClick(events[pos])
-            }
+            onClick(event)
         }
     }
 
     override fun getItemCount(): Int = events.size
 
-    // ✅ Cleaner update (no reference bugs)
     fun updateList(newList: MutableList<Event>) {
-        events.clear()
-        events.addAll(newList)
+        events = newList
         notifyDataSetChanged()
     }
 }

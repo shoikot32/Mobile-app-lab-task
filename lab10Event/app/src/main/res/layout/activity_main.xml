@@ -2,102 +2,159 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#F0F4F8">
+    android:background="#F0F4F8"
+    tools:context=".MainActivity">
 
-    <!-- Guideline vertical at 50% -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.5" />
 
-    <!-- Welcome Banner -->
-    <TextView android:id="@+id/tvWelcome"
-        android:layout_width="0dp" android:layout_height="wrap_content"
-        android:text="Welcome, Student "
-        android:textSize="22sp" android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Welcome, Student 👋"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/ivProfile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ivProfile"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView android:id="@+id/ivProfile"
-        android:layout_width="50dp" android:layout_height="50dp"
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
         android:src="@mipmap/ic_launcher_round"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Events Counter -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardCounter"
-        android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:cardCornerRadius="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
             android:text="📅  8 Upcoming Events"
-            android:textSize="18sp" android:textStyle="bold"
-            android:padding="16dp"/>
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Quick Actions 2x2 -->
-    <Button android:id="@+id/btnBrowse"
-        android:layout_width="0dp" android:layout_height="wrap_content"
-        android:text="Browse Events" android:layout_margin="4dp"
-        app:layout_constraintTop_toBottomOf="@id/cardCounter"
+    <Button
+        android:id="@+id/btnBrowse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:text="Browse Events"
+        app:layout_constraintEnd_toStartOf="@+id/guideV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideV"/>
+        app:layout_constraintTop_toBottomOf="@+id/cardCounter" />
 
-    <Button android:id="@+id/btnBookings"
-        android:layout_width="0dp" android:layout_height="wrap_content"
-        android:text="My Bookings" android:layout_margin="4dp"
-        app:layout_constraintTop_toBottomOf="@id/cardCounter"
-        app:layout_constraintStart_toEndOf="@id/guideV"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+        android:id="@+id/btnBookings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text="My Bookings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideV"
+        app:layout_constraintTop_toBottomOf="@+id/cardCounter" />
 
-    <Button android:id="@+id/btnNotifications"
-        android:layout_width="0dp" android:layout_height="wrap_content"
-        android:text="Notifications" android:layout_margin="4dp"
-        app:layout_constraintTop_toBottomOf="@id/btnBrowse"
+    <Button
+        android:id="@+id/btnNotifications"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Notifications"
+        app:layout_constraintEnd_toStartOf="@+id/guideV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideV"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnBrowse" />
 
-    <Button android:id="@+id/btnProfile"
-        android:layout_width="0dp" android:layout_height="wrap_content"
-        android:text="Profile" android:layout_margin="4dp"
-        app:layout_constraintTop_toBottomOf="@id/btnBookings"
-        app:layout_constraintStart_toEndOf="@id/guideV"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideV"
+        app:layout_constraintTop_toBottomOf="@+id/btnBookings" />
 
-    <!-- Featured Event Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/featuredCard"
-        android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
         app:cardCornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/btnNotifications"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNotifications">
 
-        <LinearLayout android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="vertical">
-            <ImageView android:layout_width="match_parent" android:layout_height="160dp"
-                android:src="@mipmap/ic_launcher" android:scaleType="centerCrop"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:text="AI Summit 2026" android:textSize="18sp"
-                android:textStyle="bold" android:padding="12dp"/>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:text="May 10, 2026 • Hall A" android:padding="12dp"
-                android:paddingTop="0dp" android:textColor="#666666"/>
-            <Button android:id="@+id/btnRegisterFeatured"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:text="Register Now" android:layout_margin="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="AI Summit 2026"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="4dp"
+                android:text="May 10, 2026 • Hall A"
+                android:textColor="#666666" />
+
+            <Button
+                android:id="@+id/btnRegisterFeatured"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="Register Now" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

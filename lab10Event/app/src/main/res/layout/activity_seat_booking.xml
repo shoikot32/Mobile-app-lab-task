@@ -1,54 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:background="#FFFDFD">
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="Select Your Seats" android:textSize="18sp"
-        android:textStyle="bold" android:gravity="center" android:padding="8dp"/>
+    <TextView
+        android:id="@+id/tvSeatTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Select Your Seats"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Legend -->
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:gravity="center" android:padding="8dp">
-        <View android:layout_width="20dp" android:layout_height="20dp"
-            android:background="#4CAF50" android:layout_marginEnd="4dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Available " android:layout_marginEnd="12dp"/>
-        <View android:layout_width="20dp" android:layout_height="20dp"
-            android:background="#F44336" android:layout_marginEnd="4dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Booked " android:layout_marginEnd="12dp"/>
-        <View android:layout_width="20dp" android:layout_height="20dp"
-            android:background="#2196F3" android:layout_marginEnd="4dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Selected"/>
-    </LinearLayout>
+    <!-- Legend Row -->
+    <TextView
+        android:id="@+id/tvLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="🟢 Available   🔴 Booked   🔵 Selected"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeatTitle" />
 
     <!-- Seat Grid -->
-    <GridView android:id="@+id/seatGrid"
-        android:layout_width="match_parent"
+    <GridView
+        android:id="@+id/seatGrid"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:numColumns="6"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
         android:horizontalSpacing="6dp"
+        android:numColumns="6"
+        android:padding="4dp"
         android:verticalSpacing="6dp"
-        android:padding="8dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/tvSummary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLegend" />
 
     <!-- Summary Bar -->
-    <LinearLayout android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="#EEEEEE"
-        android:padding="12dp">
+        android:padding="12dp"
+        android:text="0 seats selected • Total: ৳0"
+        app:layout_constraintBottom_toTopOf="@+id/btnConfirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView android:id="@+id/tvSummary"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="0 seats selected • Total: ৳0"/>
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="Confirm Booking"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button android:id="@+id/btnConfirm"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="Confirm Booking" android:layout_marginTop="8dp"/>
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
