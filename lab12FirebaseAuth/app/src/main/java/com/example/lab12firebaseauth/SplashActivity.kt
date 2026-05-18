@@ -7,37 +7,44 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
-// SplashActivity — App open হলে প্রথমে এই screen দেখাবে
-// ২ সেকেন্ড পরে check করবে — user logged in কিনা
+/**
+ * SplashActivity
+ * - Shows splash screen on app launch
+ * - Waits for 2 seconds
+ * - Checks if user is logged in or not
+ */
 class SplashActivity : AppCompatActivity() {
 
-    // FirebaseAuth instance — authentication এর সব কাজ এটি দিয়ে হবে
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // FirebaseAuth instance নেওয়া হচ্ছে
+        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // ২ সেকেন্ড পরে check করা হবে
+        // Delay for 2 seconds, then check authentication state
         Handler(Looper.getMainLooper()).postDelayed({
             checkAuthState()
-        }, 2000) // 2000 millisecond = 2 second
+        }, SPLASH_DELAY)
     }
 
-    // checkAuthState — user logged in কিনা check করা
+    /**
+     * Checks whether the user is logged in
+     */
     private fun checkAuthState() {
-        // currentUser null হলে মানে কেউ logged in নেই
-        if (auth.currentUser != null) {
-            // Already logged in — Home Dashboard এ যাবে
-            startActivity(Intent(this, HomeActivity::class.java))
+        val nextActivity = if (auth.currentUser != null) {
+            HomeActivity::class.java
         } else {
-            // Logged in না — Login screen এ যাবে
-            startActivity(Intent(this, LoginActivity::class.java))
+            LoginActivity::class.java
         }
-        // Splash screen বন্ধ করা হচ্ছে — Back চাপলে Splash এ ফিরবে না
-        finish()
+
+        startActivity(Intent(this, nextActivity))
+        finish() // Prevent returning to splash screen
+    }
+
+    companion object {
+        private const val SPLASH_DELAY: Long = 2000 // 2 seconds
     }
 }
