@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "512257606355",
+    "project_id": "skyway-c4a96",
+    "storage_bucket": "skyway-c4a96.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512257606355:android:19ac30b92a67e6453d8a26",
+        "android_client_info": {
+          "package_name": "com.example.skyway"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPfL6Rd8oNyihxZWitn3v-B1XtamMU1EU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
