@@ -133,25 +133,46 @@ class PaymentActivity : AppCompatActivity() {
         btnPay.text = ""
         btnPay.isEnabled = false
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            saveBookingToFirebase()
-        }, 2000)
+        // Fetch User Details from DB then save booking
+        val auth = FirebaseAuth.getInstance()
+        val userId = auth.currentUser?.uid
+        
+        if (userId != null) {
+            val userRef = FirebaseDatabase.getInstance("https://skyway-c4a96-default-rtdb.firebaseio.com/")
+                .getReference("Users").child(userId)
+            
+            userRef.get().addOnSuccessListener { snapshot ->
+                val userName = snapshot.child("username").value.toString()
+                val fullName = snapshot.child("name").value.toString()
+                val phone = snapshot.child("phone").value.toString()
+                
+                saveBookingToFirebase(userId, userName, fullName, phone)
+            }.addOnFailureListener {
+                saveBookingToFirebase(userId, "Unknown", "Unknown", "N/A")
+            }
+        } else {
+            saveBookingToFirebase("Guest", "Guest", "Guest User", "N/A")
+        }
     }
 
-    private fun saveBookingToFirebase() {
-        val auth = FirebaseAuth.getInstance()
-        val database = FirebaseDatabase.getInstance().getReference("bookings")
+    private fun saveBookingToFirebase(userId: String, userName: String, fullName: String, phone: String) {
+        val database = FirebaseDatabase.getInstance("https://skyway-c4a96-default-rtdb.firebaseio.com/")
+            .getReference("bookings")
         
-        val userId = auth.currentUser?.uid ?: "Guest"
         val bookingId = database.push().key ?: System.currentTimeMillis().toString()
 
         val booking = Booking(
             bookingId = bookingId,
             userId = userId,
+            userName = userName,
+            fullName = fullName,
+            phone = phone,
             packageTitle = packageTitle,
             totalAmount = totalAmount,
             personCount = personCount,
-            paymentMethod = if (selectedMethod == "Card") "Card" else "Mobile (${autoCompleteProvider.text})"
+            paymentMethod = if (selectedMethod == "Card") "Card" else "Mobile (${autoCompleteProvider.text})",
+            timestamp = System.currentTimeMillis(),
+            status = "Confirmed"
         )
 
         database.child(bookingId).setValue(booking)

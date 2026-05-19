@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -12,12 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- YouTube Player View with fixed aspect ratio -->
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:id="@+id/youtubePlayer"
-            android:layout_width="match_parent"
-            android:layout_height="220dp" />
-
         <ImageView
             android:id="@+id/img"
             android:layout_width="match_parent"
@@ -26,7 +19,7 @@
             android:scaleType="centerCrop"
             android:contentDescription="Package Image"
             android:layout_marginTop="8dp"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <TextView
             android:id="@+id/tvTitle"

@@ -53,7 +53,4 @@ dependencies {
     
     // ✅ Glide for Image Loading
     implementation(libs.glide)
-    
-    // ✅ YouTube Player
-    implementation(libs.youtube.player)
 }

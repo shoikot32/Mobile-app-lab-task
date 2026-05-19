@@ -40,7 +40,8 @@ class BookingFragment : Fragment(R.layout.fragment_booking) {
 
     private fun fetchUserBookings() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val database = FirebaseDatabase.getInstance().getReference("bookings")
+        val database = FirebaseDatabase.getInstance("https://skyway-c4a96-default-rtdb.firebaseio.com/")
+            .getReference("bookings")
 
         pbBookings.visibility = View.VISIBLE
 
@@ -57,17 +58,21 @@ class BookingFragment : Fragment(R.layout.fragment_booking) {
                     
                     bookingList.sortByDescending { it.timestamp }
                     
-                    pbBookings.visibility = View.GONE
-                    if (bookingList.isEmpty()) {
-                        tvNoBookings.visibility = View.VISIBLE
-                    } else {
-                        tvNoBookings.visibility = View.GONE
+                    if (isAdded) {
+                        pbBookings.visibility = View.GONE
+                        if (bookingList.isEmpty()) {
+                            tvNoBookings.visibility = View.VISIBLE
+                        } else {
+                            tvNoBookings.visibility = View.GONE
+                        }
+                        adapter.notifyDataSetChanged()
                     }
-                    adapter.notifyDataSetChanged()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    pbBookings.visibility = View.GONE
+                    if (isAdded) {
+                        pbBookings.visibility = View.GONE
+                    }
                 }
             })
     }

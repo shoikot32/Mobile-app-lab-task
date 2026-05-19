@@ -3,6 +3,9 @@ package com.example.skyway.models
 data class Booking(
     val bookingId: String? = null,
     val userId: String? = null,
+    val userName: String? = null,
+    val fullName: String? = null,
+    val phone: String? = null,
     val packageTitle: String? = null,
     val totalAmount: Int = 0,
     val personCount: Int = 1,
